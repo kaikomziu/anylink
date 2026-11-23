@@ -64,8 +64,19 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.openAccessibility).setOnClickListener {
             MaterialAlertDialogBuilder(this)
                 .setTitle("ユーザー補助を有効にする")
-                .setMessage("次の画面で「インストール済みアプリ」などから「AnyLink 遠隔操作」を選び、オンにしてください。\n\nこれは、接続を許可した相手がこの端末をタップ・スワイプ・文字入力で操作するために必要です。接続のたびに許可の確認が表示され、許可した権限の範囲でのみ使われます。")
+                .setMessage(
+                    "次の画面で「インストール済みアプリ」や「ダウンロードしたアプリ」から「AnyLink 遠隔操作」を選び、オンにしてください。\n\n" +
+                        "「アプリはアクセスを拒否されました」「制限付きの設定」と出た場合（Android 13 以降）:\n" +
+                        "1.「アプリ情報」を開く\n2. 右上の︙ →「制限付きの設定を許可」\n3. もう一度ここからオンにする\n\n" +
+                        "これは、接続を許可した相手がこの端末をタップ・スワイプ・文字入力で操作するために必要です。接続のたびに許可の確認が表示され、許可した権限の範囲でのみ使われます。"
+                )
                 .setPositiveButton("設定を開く") { _, _ -> startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }
+                .setNeutralButton("アプリ情報") { _, _ ->
+                    // 「制限付きの設定を許可」はアプリ情報画面の︙メニューにある
+                    startActivity(
+                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.fromParts("package", packageName, null))
+                    )
+                }
                 .setNegativeButton("キャンセル", null)
                 .show()
         }
