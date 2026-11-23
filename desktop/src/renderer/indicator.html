@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <style>
+    html, body { margin: 0; height: 100%; background: transparent; overflow: hidden;
+      font-family: "Segoe UI", "Yu Gothic UI", sans-serif; font-size: 13px; user-select: none; }
+    .bar { height: 100%; display: flex; align-items: center; gap: 10px; padding: 0 8px 0 14px; box-sizing: border-box;
+      background: rgba(150, 20, 20, .95); color: #fff; border-radius: 10px; -webkit-app-region: drag; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; flex: none; animation: b 1.2s infinite; }
+    @keyframes b { 50% { opacity: .3; } }
+    .text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+    button { -webkit-app-region: no-drag; border: none; border-radius: 7px; padding: 6px 12px; cursor: pointer;
+      background: #fff; color: #a01818; font-weight: 700; font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <span class="dot"></span>
+    <span class="text" id="text"></span>
+    <button id="disc">切断</button>
+  </div>
+  <script src="indicator.js"></script>
+</body>
+</html>

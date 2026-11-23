@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接続の要求"
+            android:textColor="@color/text"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/text"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/whoInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sub"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="この端末への接続を求めています。許可する権限を選んでください。"
+            android:textColor="@color/text" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:enabled="false"
+            android:text="画面の表示（必須）" />
+
+        <CheckBox
+            android:id="@+id/permControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="タッチ操作（タップ・スワイプ・戻る/ホーム）" />
+
+        <CheckBox
+            android:id="@+id/permKeyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="文字入力" />
+
+        <CheckBox
+            android:id="@+id/permClipboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="クリップボードの送受信" />
+
+        <TextView
+            android:id="@+id/accWarn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="ユーザー補助が無効なので、操作・文字入力は反映されません（画面の表示のみ）。"
+            android:textColor="@color/warn"
+            android:textSize="12.5sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="知らない相手からの要求は許可しないでください。許可すると、続けて画面の録画（キャスト）の確認が表示されます。"
+            android:textColor="@color/sub"
+            android:textSize="12.5sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/reject"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拒否" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="許可" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

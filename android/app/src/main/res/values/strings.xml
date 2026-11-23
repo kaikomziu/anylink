@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AnyLink</string>
+    <string name="accessibility_label">AnyLink 遠隔操作</string>
+    <string name="accessibility_desc">AnyLink で接続を許可した相手が、この端末をタップ・スワイプ・文字入力で操作できるようにします。接続のたびに許可の確認が表示され、許可した権限の範囲でのみ動作します。</string>
+</resources>

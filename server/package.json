@@ -1,0 +1,16 @@
+{
+  "name": "anylink-signaling",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AnyLink シグナリングサーバー（ID登録・接続要求・SDP/ICE中継）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

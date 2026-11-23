@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <org.webrtc.SurfaceViewRenderer
+        android:id="@+id/renderer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <!-- タッチを受ける透明なレイヤー -->
+    <View
+        android:id="@+id/touchLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/stageMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="映像を待っています…"
+        android:textColor="@color/sub" />
+
+    <!-- キーボード入力用の見えない入力欄 -->
+    <EditText
+        android:id="@+id/kbInput"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:alpha="0"
+        android:imeOptions="actionSend|flagNoExtractUi"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <!-- ツールバー -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toolbar_bg"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="220dp"
+                android:singleLine="true"
+                android:textColor="@color/text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:singleLine="true"
+                android:textColor="@color/sub"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button android:id="@+id/btnKeyboard" style="@style/ToolBtn" android:text="⌨" />
+                <Button android:id="@+id/btnBack" style="@style/ToolBtn" android:text="◁" />
+                <Button android:id="@+id/btnHome" style="@style/ToolBtn" android:text="○" />
+                <Button android:id="@+id/btnRecents" style="@style/ToolBtn" android:text="□" />
+                <Button android:id="@+id/btnEsc" style="@style/ToolBtn" android:text="Esc" />
+                <Button android:id="@+id/btnTab" style="@style/ToolBtn" android:text="Tab" />
+                <Button android:id="@+id/btnWin" style="@style/ToolBtn" android:text="Win" />
+                <Button android:id="@+id/btnCtrl" style="@style/ToolBtn" android:text="Ctrl" />
+                <Button android:id="@+id/btnRight" style="@style/ToolBtn" android:text="右ｸﾘｯｸ" />
+                <Button android:id="@+id/btnClipSend" style="@style/ToolBtn" android:text="📋→" />
+                <Button android:id="@+id/btnClipGet" style="@style/ToolBtn" android:text="←📋" />
+                <Button android:id="@+id/btnHide" style="@style/ToolBtn" android:text="▲" />
+                <Button
+                    android:id="@+id/btnDisconnect"
+                    style="@style/ToolBtn"
+                    android:text="切断"
+                    android:textColor="@color/danger" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- ツールバーを隠したとき用のつまみ -->
+    <TextView
+        android:id="@+id/showToolbar"
+        android:layout_width="56dp"
+        android:layout_height="22dp"
+        android:layout_gravity="top|center_horizontal"
+        android:background="@drawable/toolbar_bg"
+        android:gravity="center"
+        android:text="▼"
+        android:textColor="@color/text"
+        android:textSize="11sp"
+        android:visibility="gone" />
+</FrameLayout>

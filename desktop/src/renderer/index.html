@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; connect-src 'self' ws: wss:; img-src 'self' data:; media-src 'self' blob: mediastream:; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>AnyLink</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ホーム -->
+  <section id="home" class="view active">
+    <header class="topbar">
+      <div class="brand"><span class="logo">A</span>AnyLink</div>
+      <div class="status" id="status"><span class="dot"></span><span id="statusText">接続中…</span></div>
+      <button class="icon-btn" id="openSettings" title="設定">⚙</button>
+    </header>
+
+    <div id="hostBanner" class="host-banner hidden">
+      <span class="pulse"></span>
+      <span id="hostBannerText">操作されています</span>
+      <button class="btn danger small" id="hostDisconnect">切断</button>
+    </div>
+
+    <main class="home-grid">
+      <div class="card">
+        <div class="card-label">このデバイスのID</div>
+        <div class="my-id" id="myId">--- --- ---</div>
+        <div class="card-sub" id="myName"></div>
+        <button class="btn ghost small" id="copyId">IDをコピー</button>
+        <p class="hint">このIDを相手に伝えると、相手からの接続要求を受けられます。接続されるときは必ず許可の確認が表示されます。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">リモートデバイスに接続</div>
+        <form id="connectForm">
+          <input id="remoteId" class="id-input" inputmode="numeric" autocomplete="off" placeholder="相手のIDを入力" maxlength="11" />
+          <div class="req-perms">
+            <span class="card-sub">希望する権限:</span>
+            <label><input type="checkbox" id="reqControl" checked /> 操作</label>
+            <label><input type="checkbox" id="reqKeyboard" checked /> キーボード</label>
+            <label><input type="checkbox" id="reqClipboard" /> クリップボード</label>
+          </div>
+          <button class="btn primary wide" type="submit" id="connectBtn">接続</button>
+        </form>
+        <div class="card-label recent-label">最近の接続</div>
+        <ul id="recent" class="recent"></ul>
+      </div>
+    </main>
+  </section>
+
+  <!-- 操作画面（接続する側） -->
+  <section id="viewer" class="view">
+    <div class="toolbar" id="toolbar">
+      <div class="tb-left">
+        <span class="tb-title" id="viewerTitle">接続中</span>
+        <span class="tb-perms" id="viewerPerms"></span>
+      </div>
+      <div class="tb-right">
+        <span class="tb-stats" id="viewerStats"></span>
+        <button class="btn ghost small hidden" data-nav="back" title="戻る">◁</button>
+        <button class="btn ghost small hidden" data-nav="home" title="ホーム">○</button>
+        <button class="btn ghost small hidden" data-nav="recents" title="履歴">□</button>
+        <button class="btn ghost small" id="sendClip" title="自分のクリップボードを相手に送る">📋→</button>
+        <button class="btn ghost small" id="getClip" title="相手のクリップボードを受け取る">←📋</button>
+        <button class="btn ghost small" id="toggleFs" title="全画面">⛶</button>
+        <button class="btn danger small" id="viewerDisconnect">切断</button>
+      </div>
+    </div>
+    <div class="stage" id="stage" tabindex="0">
+      <video id="remoteVideo" autoplay playsinline muted></video>
+      <div class="stage-msg" id="stageMsg">映像を待っています…</div>
+    </div>
+  </section>
+
+  <!-- 接続要求の許可ダイアログ（操作される側） -->
+  <div class="modal hidden" id="consentModal">
+    <div class="dialog">
+      <div class="dialog-title">接続の要求</div>
+      <p class="consent-who"><b id="consentName"></b><br /><span class="card-sub" id="consentInfo"></span></p>
+      <p>このデバイスへの接続を求めています。許可する権限を選んでください。</p>
+      <div class="perm-list">
+        <label class="perm"><input type="checkbox" checked disabled /> <span><b>画面の表示</b><small>画面が相手に見えます（必須）</small></span></label>
+        <label class="perm"><input type="checkbox" id="permControl" /> <span><b>マウス操作</b><small>マウスでクリック・移動・スクロールできます</small></span></label>
+        <label class="perm"><input type="checkbox" id="permKeyboard" /> <span><b>キーボード入力</b><small>キー入力・文字入力ができます</small></span></label>
+        <label class="perm"><input type="checkbox" id="permClipboard" /> <span><b>クリップボード</b><small>クリップボードの送受信ができます</small></span></label>
+      </div>
+      <p class="warn">知らない相手からの要求は許可しないでください。</p>
+      <div class="dialog-actions">
+        <button class="btn ghost" id="consentReject">拒否 <span id="consentTimer"></span></button>
+        <button class="btn primary" id="consentAccept">許可</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 接続待ち -->
+  <div class="modal hidden" id="waitModal">
+    <div class="dialog small">
+      <div class="spinner"></div>
+      <div class="dialog-title" id="waitText">相手の許可を待っています…</div>
+      <div class="dialog-actions center">
+        <button class="btn ghost" id="waitCancel">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 設定 -->
+  <div class="modal hidden" id="settingsModal">
+    <div class="dialog">
+      <div class="dialog-title">設定</div>
+      <label class="field"><span>シグナリングサーバーURL</span><input id="setServer" placeholder="wss://example.com" /></label>
+      <label class="field"><span>デバイス名</span><input id="setName" maxlength="64" /></label>
+      <details>
+        <summary>TURNサーバー（任意）</summary>
+        <p class="card-sub">P2Pでつながらないネットワーク（携帯回線・企業内など）向けの中継サーバーです。</p>
+        <label class="field"><span>TURN URL</span><input id="setTurnUrl" placeholder="turn:example.com:3478" /></label>
+        <label class="field"><span>ユーザー名</span><input id="setTurnUser" /></label>
+        <label class="field"><span>パスワード</span><input id="setTurnPass" type="password" /></label>
+      </details>
+      <div class="dialog-actions">
+        <button class="btn ghost" id="settingsCancel">キャンセル</button>
+        <button class="btn primary" id="settingsSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "name": "anylink",
+  "productName": "AnyLink",
+  "version": "0.1.0",
+  "description": "AnyLink 遠隔操作アプリ（PC版）",
+  "main": "src/main.js",
+  "author": "AnyLink",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build:helper": "node scripts/build-helper.js",
+    "dist": "node scripts/build-helper.js && electron-builder --win portable nsis"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "app.anylink.desktop",
+    "productName": "AnyLink",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/input-helper.exe",
+        "to": "input-helper.exe"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    },
+    "portable": {
+      "artifactName": "AnyLink-${version}-portable.exe"
+    },
+    "nsis": {
+      "artifactName": "AnyLink-${version}-setup.exe",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
