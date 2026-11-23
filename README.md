@@ -1,6 +1,9 @@
 # AnyLink
 
 PC（Windows）と Android で使える遠隔操作アプリです。
+
+- ホームページ: https://kaikomziu.github.io/anylink/
+- ダウンロード: https://github.com/kaikomziu/anylink/releases/latest
 端末ごとに9桁のIDがあり、相手のIDを入力して接続 → 相手側で権限を選んで許可 → 操作できます。
 映像と操作は **WebRTC の P2P** で端末同士が直接やり取りし、サーバー（WebSocket）は接続の取り次ぎだけを行います。
 
@@ -12,6 +15,7 @@ PC（Windows）と Android で使える遠隔操作アプリです。
 | `desktop/` | PC版（Electron）。画面配信・操作・許可ダイアログ。入力注入は `native/InputHelper.cs`（SendInput） |
 | `android/` | Android版（Kotlin）。画面配信は MediaProjection、操作はユーザー補助サービス |
 | `release/` | ビルド済みの配布物（exe / apk） |
+| `docs/` | ホームページ（GitHub Pages） |
 | `tools/make_icons.py` | アイコン生成 |
 
 ## 使い方

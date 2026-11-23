@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AnyLink — PCとAndroidの遠隔操作</title>
+  <meta name="description" content="AnyLink は、IDを入れるだけでPCやAndroidを遠隔操作できる無料アプリです。接続のたびに相手の許可が必要で、映像はP2Pで直接届きます。" />
+  <link rel="icon" href="favicon.png" />
+  <style>
+    :root { --text: #16181d; --sub: #6b7280; --line: #e5e7eb; --accent: #3d7bff; --bg2: #f6f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--text); background: #fff; line-height: 1.7;
+      font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 72px 24px 40px; }
+    .hero { text-align: center; }
+    .hero img { width: 88px; height: 88px; }
+    h1 { font-size: 40px; margin: 14px 0 6px; letter-spacing: .5px; }
+    .lead { color: var(--sub); font-size: 17px; margin: 0; }
+
+    .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 40px 0 10px; }
+    .dl { display: block; text-decoration: none; color: var(--text); border: 1px solid var(--line); border-radius: 14px;
+      padding: 18px 20px; transition: border-color .15s, box-shadow .15s; }
+    .dl:hover { border-color: var(--accent); box-shadow: 0 4px 18px rgba(61,123,255,.12); }
+    .dl.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .dl b { display: block; font-size: 17px; }
+    .dl span { font-size: 13px; opacity: .75; }
+    .version { text-align: center; color: var(--sub); font-size: 13px; margin: 0; }
+    .version a { color: var(--sub); }
+
+    h2 { font-size: 20px; margin: 56px 0 14px; }
+    ol.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; display: grid; gap: 10px; }
+    ol.steps li { counter-increment: s; display: flex; gap: 14px; align-items: flex-start; background: var(--bg2); border-radius: 12px; padding: 14px 16px; }
+    ol.steps li::before { content: counter(s); flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent);
+      color: #fff; font-weight: 700; font-size: 14px; display: grid; place-items: center; margin-top: 1px; }
+    ul.points { padding-left: 20px; margin: 0; }
+    ul.points li { margin: 4px 0; }
+    .note { color: var(--sub); font-size: 14px; }
+    code { background: var(--bg2); padding: 1px 6px; border-radius: 5px; font-size: 13px; }
+    footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 20px 24px; text-align: center; color: var(--sub); font-size: 13px; }
+    footer a { color: var(--sub); }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <img src="icon.png" alt="AnyLink" />
+      <h1>AnyLink</h1>
+      <p class="lead">IDを入れるだけで、PCとAndroidを遠隔操作。</p>
+    </section>
+
+    <div class="downloads">
+      <a class="dl primary" href="https://github.com/kaikomziu/anylink/releases/latest/download/AnyLink-Setup.exe">
+        <b>Windows</b><span>インストーラー（.exe）</span>
+      </a>
+      <a class="dl" href="https://github.com/kaikomziu/anylink/releases/latest/download/AnyLink-Portable.exe">
+        <b>Windows</b><span>インストール不要版（.exe）</span>
+      </a>
+      <a class="dl" href="https://github.com/kaikomziu/anylink/releases/latest/download/AnyLink.apk">
+        <b>Android</b><span>アプリ（.apk）</span>
+      </a>
+    </div>
+    <p class="version">無料 ・ Windows 10/11、Android 8.0 以上 ・ <a href="https://github.com/kaikomziu/anylink/releases">過去のバージョン</a></p>
+
+    <h2>使い方</h2>
+    <ol class="steps">
+      <li><div>操作したい端末と、操作される端末の両方に AnyLink を入れます。</div></li>
+      <li><div>操作したい側で、相手の画面に出ている9桁のIDを入力して「接続」を押します。</div></li>
+      <li><div>相手の端末に確認が出ます。相手が操作を許す範囲（マウス・キーボードなど）を選んで「許可」すると、操作できます。</div></li>
+    </ol>
+
+    <h2>安心して使えるように</h2>
+    <ul class="points">
+      <li>接続には毎回、相手の許可が必要です。何ができるかも相手が選べます。</li>
+      <li>操作されている間は画面に表示が出て、いつでも「切断」できます。</li>
+      <li>画面と操作は端末どうしで直接（P2P）やり取りし、サーバーには残りません。</li>
+    </ul>
+    <p class="note">知らない人に頼まれてIDを教えたり、接続を許可したりしないでください。</p>
+
+    <h2>インストールのメモ</h2>
+    <ul class="points">
+      <li><b>Windows</b>：「WindowsによってPCが保護されました」と出たら「詳細情報」→「実行」を押します。</li>
+      <li><b>Android</b>：ダウンロードした apk を開き、「この提供元のアプリを許可」をオンにしてインストールします。
+        操作を受け入れるには、アプリの案内に従って「ユーザー補助」で <code>AnyLink 遠隔操作</code> をオンにします（画面を見せるだけなら不要）。</li>
+    </ul>
+  </main>
+
+  <footer>
+    AnyLink ・ <a href="https://github.com/kaikomziu/anylink">GitHub</a>
+  </footer>
+</body>
+</html>
