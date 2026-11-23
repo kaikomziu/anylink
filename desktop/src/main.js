@@ -27,7 +27,7 @@ let quitting = false;
 // ---- 設定 ----
 const configPath = () => path.join(app.getPath('userData'), 'config.json');
 const DEFAULT_CONFIG = {
-  serverUrl: 'ws://localhost:8787',
+  serverUrl: 'wss://anylink-signaling.onrender.com',
   deviceName: os.hostname(),
   turnUrl: '',
   turnUser: '',

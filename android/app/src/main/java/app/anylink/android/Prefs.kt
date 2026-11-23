@@ -65,7 +65,7 @@ class Prefs(context: Context) {
     }
 
     companion object {
-        const val DEFAULT_SERVER = "ws://192.168.0.10:8787"
+        const val DEFAULT_SERVER = "wss://anylink-signaling.onrender.com"
     }
 }
 
